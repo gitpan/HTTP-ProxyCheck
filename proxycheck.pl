@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 use strict;
 use warnings;
@@ -18,16 +18,14 @@ Performing ProxyCheck...
 Trying to connect to $proxy and retrieve $url
 INTRO
 
-
-if (HTTP::ProxyCheck->check(proxy=>"$proxy", url => "$url")) {
-	print "$proxy returns: ".HTTP::ProxyCheck->getAnswer;
+if (HTTP::ProxyCheck->check(proxy=>"$proxy", url => "$url", answer => "header")) {
+	print "$proxy returns: " . HTTP::ProxyCheck->get_answer . "\n";
 }
 else {
-	print "Error (".HTTP::ProxyCheck->getReason.")";
+	print "Error (" . HTTP::ProxyCheck->get_reason . ")\n";
 }
 
 print <<"OUTRO";
-
 
 ProxyCheck done.
 

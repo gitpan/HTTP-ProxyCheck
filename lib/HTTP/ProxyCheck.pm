@@ -13,17 +13,13 @@ use Validate::Net;
 use IO::Socket;
 
 # Globals
-use vars qw($VERSION $errstr $reason $answer %DEFAULT);
+use vars qw($VERSION $answer $errstr $reason);
 
 BEGIN {
-	$VERSION = 0.1;
+	$VERSION = 0.2;
+	$answer = '';
 	$errstr = '';
 	$reason = '';
-}
-
-# get version
-sub getVersion {
-	return $VERSION;
 }
 
 
@@ -47,7 +43,9 @@ sub new {
 
 sub check {
 	my $self = shift->_self;
-	my %args = @_;
+
+	# initialize %args with answer => "header" (default) and @_
+	my %args = (answer => "header", @_);
 	my $return;
 	my $dochost;
 	
@@ -55,11 +53,11 @@ sub check {
 
 	# check wether proxy address is specified
 	if (!$args{proxy}) {
-		return $self->setReason("Proxy address: None specified");
+		return $self->_set_reason("Proxy address: None specified");
 	}
 	# check proxy address
 	else {
-		$return = $self->check_proxyaddress($args{proxy});
+		$return = $self->check_address($args{proxy});
 		if ($return != 1) {
 			return $return;
 		}
@@ -67,7 +65,7 @@ sub check {
 
 	# check wether URL is specified
 	if (!$args{url}) {
-		return $self->setReason("URL: None specified");
+		return $self->_set_reason("URL: None specified");
 	}
 
 	# check URL
@@ -75,14 +73,19 @@ sub check {
 		$dochost = $1;
 	}
 	else {
-		return $self->setReason
+		return $self->_set_reason
 		("URL: Doesn't comply with the pattern of a valid URL for ProxyCheck e.g. 'http://www.cpan.org/index.html'");
 	}
 
-	# do proxy check
-	$self->check_proxy(%args, dochost=>$dochost);
+	# check the provided $args{answer}
+	if ($args{answer} !~ /^header|full$/) {
+		$args{answer} = "header";
+	}
 
-	if ($self->getReason()) {
+	# do proxy check
+	$self->_check_proxy(%args, dochost=>$dochost);
+
+	if ($self->get_reason()) {
 		return 0;
 	}
 	else {
@@ -92,7 +95,7 @@ sub check {
 	return $return;
 }
 
-sub check_proxyaddress {
+sub check_address {
 	my $self = shift->_self;
 	my $proxyaddress = shift;
 
@@ -100,7 +103,7 @@ sub check_proxyaddress {
 	
 	# Proxy address format
 	if ($proxyaddress !~ /.*:\d{1,5}\b/) {
-		return $self->setReason("Proxy address: Doesn't comply with the pattern 'host:port' e.g. 'proxy:8080'");
+		return $self->_set_reason("Proxy address: Doesn't comply with the pattern 'host:port' e.g. 'proxy:8080'");
 	}
 
 	$proxyaddress =~ m/(.*):(\d{1,5})\b/;
@@ -110,15 +113,25 @@ sub check_proxyaddress {
 	my $proxyport = $2;
 
 	if (!(Validate::Net->host($proxyhost) && Validate::Net->port($proxyport))) {
-		return $self->setReason("Proxy address: ".Validate::Net->reason());
+		return $self->_set_reason("Proxy address: ".Validate::Net->reason());
 	}
 
 	# Else: OK
 	return 1;
 }
 
-sub check_proxy {
+
+#====================================================================#
+# Private _check_proxy() Method                                      #
+#====================================================================#
+
+sub _check_proxy {
 	my $self = shift->_self;
+	
+	# _checkProxy() needs the following arguments:
+	# %args = ( proxy => "$proxy", url => "$url", 
+	#	dochost => "$dochost"  [, answer => "header" | "full"] )
+
 	my %args = @_;
 
 	$reason = '';
@@ -134,7 +147,7 @@ sub check_proxy {
   		Type => SOCK_STREAM);
 
 	if ($@) {
-		return $self->setReason("ProxyCheck: $@");
+		return $self->_set_reason("ProxyCheck: $@");
 	} 
 
   	$tmp = <<"REQUEST";
@@ -159,40 +172,48 @@ REQUEST
      		$line =~ s#<.?>##g;
      		$buff .= "\n$line";
   	}
-  
-  	$buff =~ m#.+\n?#;
-  	$buff = $&;
-	$buff =~ s/\n//g;
+ 
+	if ($args{answer} eq "header") { 
+  		$buff =~ m#.+\n?#;
+  		$buff = $&;
+		$buff =~ s/\n//g;
+	}
 
 	close ($socket);
 
-	$self->setAnswer($buff);	
+	$self->_set_answer($buff);	
 
   	return 1;
 }
 
 
 #====================================================================#
-# Message handling                                                   #
+# Public message handling methods                                    #
 #====================================================================#
 
-sub setAnswer {
+sub get_answer {
+	return $answer;
+}
+
+sub get_reason {
+	return $reason;
+}
+
+
+#====================================================================#
+# Private message handling methods                                   #
+#====================================================================#
+
+sub _set_answer {
 	$answer = $_[1];
 	undef;
 }
 
-sub setReason {
+sub _set_reason {
 	$reason = $_[1];
 	return 0;
 }
 
-sub getAnswer {
-	return $answer;
-}
-
-sub getReason {
-	return $reason;
-}
 
 1;
 
@@ -217,11 +238,11 @@ HTTP::ProxyCheck - Checks HTTP proxy servers.
 
   print "Trying to connect to $proxy and retrieve $url\n";
 
-  if (ProxyCheck->check(proxy=>"$proxy", url => "$url")) {
-	  print "$proxy returns: ".ProxyCheck->getAnswer."\n";
+  if (HTTP::ProxyCheck->check(proxy=>"$proxy", url => "$url")) {
+	  print "$proxy returns: " . HTTP::ProxyCheck->get_answer . "\n";
   }
   else {
-	  print "Error (".ProxyCheck->getReason.")\n";
+	  print "Error (" . HTTP::ProxyCheck->get_reason . ")\n";
   }
 
 =head1 DESCRIPTION
@@ -230,30 +251,35 @@ HTTP::ProxyCheck is a class to check HTTP proxy servers. It connects to given
 HTTP proxy servers and tries to retrieve a provided URL through them.
 
 The return message from the proxy servers can be accessed through the 
-C<getAnswer> method.
+C<get_answer> method.
 
-Whenever a check fails, you can access the reason through the C<getReason> 
+Whenever a check fails, you can access the reason through the C<get_reason> 
 method.
 
 =head1 METHODS
 
-=head2 check( proxy => "$proxy", url => "$url" )
+=head2 check(proxy => "$proxy", url => "$url" [, answer => "header" | "full"])
 
 The C<check> method is used to check a HTTP proxy server. The C<check> method
 includes a test to check the syntax of the provided proxy server address and
-URL.
+URL. You can specify wether you want to get only the header or the full page 
+as return value from the method. This specification is optionally. The default 
+answer is "header".
 
-=head2 check_proxyaddress( $proxyaddress )
+=head2 check_address($proxy)
 
-The C<check_proxyaddress> method is used to check for a valid proxy server 
-address.
+The C<check_address> method is used to check for a valid proxy server address. When 
+you use C<check> the proxy address is checked with this method automatically.
 
-=head2 check_proxy( proxy => "$proxy", url => "$url", dochost => "$dochost" )
+=head2 get_answer()
 
-The C<check_proxy> method is used to check a HTTP proxy server. In contrast to
-the C<check> method C<check_proxy> doesn't check the syntax of the provided 
-proxy server address and URL. It also doesn't extract the document host from 
-the specified URL.
+Through the C<get_answer> method the return message from the proxy servers can be 
+accessed
+
+=head2 get_reason()
+
+When a proxy check fails, the reason can be accessed through the C<get_reason> 
+method.
 
 =head1 BUGS
 
@@ -266,7 +292,7 @@ Contact the author
 =head1 AUTHOR
 
         Thomas Weibel
-        thomas@beeblebrox.net
+        cpan@beeblebrox.net
         http://beeblebrox.net/
 
 =head1 COPYRIGHT

@@ -1,4 +1,4 @@
-HTTP::ProxyCheck version 0.1
+HTTP::ProxyCheck version 0.2
 ============================
 
 NAME
@@ -32,11 +32,11 @@ SYNOPSIS
 
       print "Trying to connect to $proxy and retrieve $url\n";
 
-      if (ProxyCheck->check(proxy=>"$proxy", url => "$url")) {
-              print "$proxy returns: ".ProxyCheck->getAnswer."\n";
+      if (HTTP::ProxyCheck->check(proxy=>"$proxy", url => "$url")) {
+              print "$proxy returns: " . HTTP::ProxyCheck->get_answer . "\n";
       }
       else {
-              print "Error (".ProxyCheck->getReason.")\n";
+              print "Error (" . HTTP::ProxyCheck->get_reason . ")\n";
       }
 
 DESCRIPTION
@@ -45,26 +45,31 @@ DESCRIPTION
     them.
 
     The return message from the proxy servers can be accessed through the
-    "getAnswer" method.
+    "get_answer" method.
 
     Whenever a check fails, you can access the reason through the
-    "getReason" method.
+    "get_reason" method.
 
 METHODS
-  check( proxy => "$proxy", url => "$url" )
+  check(proxy => "$proxy", url => "$url" [, answer => "header" | "full"])
     The "check" method is used to check a HTTP proxy server. The "check"
     method includes a test to check the syntax of the provided proxy server
-    address and URL.
+    address and URL. You can specify wether you want to get only the header
+    or the full page as return value from the method. This specification is
+    optionally. The default answer is "header".
 
-  check_proxyaddress( $proxyaddress )
-    The "check_proxyaddress" method is used to check for a valid proxy
-    server address.
+  check_address($proxy)
+    The "check_address" method is used to check for a valid proxy server
+    address. When you use "check" the proxy address is checked with this
+    method automatically.
 
-  check_proxy( proxy => "$proxy", url => "$url", dochost => "$dochost" )
-    The "check_proxy" method is used to check a HTTP proxy server. In
-    contrast to the "check" method "check_proxy" doesn't check the syntax of
-    the provided proxy server address and URL. It also doesn't extract the
-    document host from the specified URL.
+  get_answer()
+    Through the "get_answer" method the return message from the proxy
+    servers can be accessed
+
+  get_reason()
+    When a proxy check fails, the reason can be accessed through the
+    "get_reason" method.
 
 BUGS
     Unknown
@@ -74,7 +79,7 @@ SUPPORT
 
 AUTHOR
             Thomas Weibel
-            thomas@beeblebrox.net
+            cpan@beeblebrox.net
             http://beeblebrox.net/
 
 COPYRIGHT

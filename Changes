@@ -1,4 +1,9 @@
 Revision history for Perl extension HTTP::ProxyCheck.
 
-0.01  Wed Feb  5 14:35:25 2003
+0.2  Fri Feb 21 11:57:43 CET 2003
+	- added check(answer => $type)
+	- renamed methods to gain more consistency
+	- updated POD
+
+0.1  Wed Feb  5 14:35:25 2003
 	- original version
