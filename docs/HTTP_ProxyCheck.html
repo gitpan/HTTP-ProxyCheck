@@ -3,7 +3,7 @@
 <head>
 <title>HTTP::ProxyCheck - a class to check the functionality of HTTP proxy servers.</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
-<link rev="made" href="mailto:root@localhost" />
+<link rev="made" href="mailto:thom@zaphod.earth.h2g2" />
 </head>
 
 <body>
@@ -19,25 +19,25 @@
 	<li><a href="#constructor">CONSTRUCTOR</a></li>
 	<ul>
 
-		<li><a href="#new(_[attribute_=>_$value,_...]_)">new( [attribute =&gt; $value, ...] )</a></li>
+		<li><a href="#new___attribute_____value________">new( [attribute =&gt; $value, ...] )</a></li>
 	</ul>
 
 	<li><a href="#methods">METHODS</a></li>
 	<ul>
 
-		<li><a href="#check(_[attribute_=>_$value,_...]_)">check( [attribute =&gt; $value, ...] )</a></li>
-		<li><a href="#get_answer(_)">get_answer( )</a></li>
-		<li><a href="#get_error(_)">get_error( )</a></li>
-		<li><a href="#get_proxy(_)">get_proxy( )</a></li>
-		<li><a href="#set_proxy(_$proxy_)">set_proxy( $proxy )</a></li>
-		<li><a href="#get_check_proxy(_)">get_check_proxy( )</a></li>
-		<li><a href="#set_check_proxy(_$check_)">set_check_proxy( $check )</a></li>
-		<li><a href="#get_url(_)">get_url( )</a></li>
-		<li><a href="#set_url(_$url_)">set_url( $url )</a></li>
-		<li><a href="#get_check_url(_)">get_check_url( )</a></li>
-		<li><a href="#set_check_url(_$check_)">set_check_url( $check )</a></li>
-		<li><a href="#get_answer_size(_)">get_answer_size( )</a></li>
-		<li><a href="#set_answer_size(_$answer_size_)">set_answer_size( $answer_size )</a></li>
+		<li><a href="#check___attribute_____value________">check( [attribute =&gt; $value, ...] )</a></li>
+		<li><a href="#get_answer___">get_answer( )</a></li>
+		<li><a href="#get_error___">get_error( )</a></li>
+		<li><a href="#get_proxy___">get_proxy( )</a></li>
+		<li><a href="#set_proxy___proxy__">set_proxy( $proxy )</a></li>
+		<li><a href="#get_check_proxy___">get_check_proxy( )</a></li>
+		<li><a href="#set_check_proxy___check__">set_check_proxy( $check )</a></li>
+		<li><a href="#get_url___">get_url( )</a></li>
+		<li><a href="#set_url___url__">set_url( $url )</a></li>
+		<li><a href="#get_check_url___">get_check_url( )</a></li>
+		<li><a href="#set_check_url___check__">set_check_url( $check )</a></li>
+		<li><a href="#get_answer_size___">get_answer_size( )</a></li>
+		<li><a href="#set_answer_size___answer_size__">set_answer_size( $answer_size )</a></li>
 	</ul>
 
 	<li><a href="#error_handling">ERROR HANDLING</a></li>
@@ -95,14 +95,14 @@ HTTP proxy servers and tries to retrieve a provided URL through them.</p>
 <h1><a name="constructor">CONSTRUCTOR</a></h1>
 <p>
 </p>
-<h2><a name="new(_[attribute_=>_$value,_...]_)">new( [attribute =&gt; $value, ...] )</a></h2>
+<h2><a name="new___attribute_____value________">new( [attribute =&gt; $value, ...] )</a></h2>
 <p><code>new()</code> is the HTTP::ProxyCheck object constructor.</p>
 <p>If an error happens while constructing the object, use 
 <code>$HTTP::ProxyCheck::error</code> to get the error message.</p>
 <p>All named attributes of <code>new()</code> are optional.</p>
 <p><strong>Attributes</strong></p>
 <ul>
-<li><strong><a name="item_proxy_%3d%3e_%24proxy">proxy =&gt; $proxy</a></strong><br />
+<li><strong><a name="item_proxy__3d_3e__24proxy">proxy =&gt; $proxy</a></strong><br />
 </li>
 Specifies the address of the proxy server to check. This can also be done with 
 <code>set_proxy()</code>.
@@ -110,7 +110,7 @@ Specifies the address of the proxy server to check. This can also be done with
 tested whether they are valid. If you want to disable this test, you can set
 <code>check_proxy =&gt; 0</code>.</p>
 <p></p>
-<li><strong><a name="item_check_proxy_%3d%3e_1%7c0">check_proxy =&gt; 1|0</a></strong><br />
+<li><strong><a name="item_check_proxy__3d_3e_1_7c0">check_proxy =&gt; 1|0</a></strong><br />
 </li>
 Set <code>check_proxy =&gt; 0</code> to disable the check whether the proxy server 
 address is valid.
@@ -118,7 +118,7 @@ address is valid.
 address gets tested.</p>
 <p>This attribute can also be set with <code>set_check_proxy()</code>.</p>
 <p></p>
-<li><strong><a name="item_url_%3d%3e_%24url">url =&gt; $url</a></strong><br />
+<li><strong><a name="item_url__3d_3e__24url">url =&gt; $url</a></strong><br />
 </li>
 Specifies the URL to use for the proxy server check. This can also be done 
 with <code>set_url()</code>.
@@ -126,13 +126,13 @@ with <code>set_url()</code>.
 tested whether it is valid. If you want to disable this test, you can set
 <code>check_url =&gt; 0</code>.</p>
 <p></p>
-<li><strong><a name="item_check_url_%3d%3e_1%7c0">check_url =&gt; 1|0</a></strong><br />
+<li><strong><a name="item_check_url__3d_3e_1_7c0">check_url =&gt; 1|0</a></strong><br />
 </li>
 Set <code>check_url =&gt; 0</code> to disable the check whether the URL is valid.
 <p>The default value of <code>check_url</code> is <code>1</code> which means, the URL gets tested.</p>
 <p>This attribute can also be set with <code>set_check_url()</code>.</p>
 <p></p>
-<li><strong><a name="item_answer_size_%3d%3e_short%7cheader%7cfull">answer_size =&gt; short|header|full</a></strong><br />
+<li><strong><a name="item_answer_size__3d_3e_short_7cheader_7cfull">answer_size =&gt; short|header|full</a></strong><br />
 </li>
 Defines the size of the proxy server answer.
 <p><code>short</code> means that only the HTTP status code, e.g.</p>
@@ -157,7 +157,7 @@ proxy server.</p>
 <p>The default value of <code>answer_size</code> is <code>header</code>.</p>
 <p>This attribute can also be set with <code>set_answer_size()</code>.</p>
 <p></p>
-<li><strong><a name="item_verbose_errors_%3d%3e_0%7c1">verbose_errors =&gt; 0|1</a></strong><br />
+<li><strong><a name="item_verbose_errors__3d_3e_0_7c1">verbose_errors =&gt; 0|1</a></strong><br />
 </li>
 Set <code>verbose_errors =&gt; 1</code> to enable verbose error messages.
 <p>Verbose error messages look like this:</p>
@@ -169,14 +169,14 @@ Set <code>verbose_errors =&gt; 1</code> to enable verbose error messages.
 <p>The default value of <code>verbose_errors</code> is <code>0</code>.</p>
 <p>For more information see <a href="#error_handling">ERROR HANDLING</a>.</p>
 <p></p>
-<li><strong><a name="item_print_error_%3d%3e_1%7c0">print_error =&gt; 1|0</a></strong><br />
+<li><strong><a name="item_print_error__3d_3e_1_7c0">print_error =&gt; 1|0</a></strong><br />
 </li>
 Set <code>print_error =&gt; 0</code> to disable that error messages are displayed with
 <code>Carp::carp()</code>.
 <p>The default value of <code>print_error</code> is <code>1</code>.</p>
 <p>For more information see <a href="#error_handling">ERROR HANDLING</a>.</p>
 <p></p>
-<li><strong><a name="item_raise_error_%3d%3e_0%7c1">raise_error =&gt; 0|1</a></strong><br />
+<li><strong><a name="item_raise_error__3d_3e_0_7c1">raise_error =&gt; 0|1</a></strong><br />
 </li>
 Set <code>raise_error =&gt; 1</code> to enable that error messages are displayed with 
 <code>Carp::croak()</code> and the program is brought to an end.
@@ -201,7 +201,7 @@ Blessed reference
 <h1><a name="methods">METHODS</a></h1>
 <p>
 </p>
-<h2><a name="check(_[attribute_=>_$value,_...]_)">check( [attribute =&gt; $value, ...] )</a></h2>
+<h2><a name="check___attribute_____value________">check( [attribute =&gt; $value, ...] )</a></h2>
 <p><code>check()</code> does the actual proxy server checking. It connects to a specified
 proxy server and tries to get a defined URL through it.</p>
 <p>All named attributes of <code>check()</code> are optional, but <code>proxy</code> and <code>url</code>
@@ -211,7 +211,7 @@ must be either set as object or method attribute.</p>
 <li><strong>proxy =&gt; $proxy</strong><br />
 </li>
 Defines the proxy server to check.
-<p><a href="#item_proxy_%3d%3e_%24proxy"><code>proxy =&gt; $proxy</code></a> has higher precedence than the object attribute 
+<p><a href="#item_proxy__3d_3e__24proxy"><code>proxy =&gt; $proxy</code></a> has higher precedence than the object attribute 
 <code>proxy</code>. It is only used by this method call. It doesn't get saved as object
 attribute or changes the object attribute. If you want to do this use 
 <code>set_proxy()</code>.</p>
@@ -230,7 +230,7 @@ object attribute or changes the object attribute. If you want to do this use
 <li><strong>url =&gt; $url</strong><br />
 </li>
 Defines the URL to use with the proxy server check.
-<p><a href="#item_url_%3d%3e_%24url"><code>url =&gt; $url</code></a> has higher precedence than the object attribute 
+<p><a href="#item_url__3d_3e__24url"><code>url =&gt; $url</code></a> has higher precedence than the object attribute 
 <code>url</code>. It is only used by this method call. It doesn't get saved as object 
 attribute or changes the object attribute. If you want to do this use 
 <code>set_url()</code>.</p>
@@ -270,7 +270,7 @@ object attribute or changes the object attribute. If you want to do this use
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_answer(_)">get_answer( )</a></h2>
+<h2><a name="get_answer___">get_answer( )</a></h2>
 <p><code>get_answer()</code> gets the most recent proxy server answer.</p>
 <p>The proxy server answer is in the form specified by the <code>answer_size</code> 
 attribute of the HTTP::ProxyCheck object or the <code>check()</code> method.</p>
@@ -290,7 +290,7 @@ attribute of the HTTP::ProxyCheck object or the <code>check()</code> method.</p>
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_error(_)">get_error( )</a></h2>
+<h2><a name="get_error___">get_error( )</a></h2>
 <p><code>get_error()</code> gets the most recent error message.</p>
 <p>For more information see <a href="#error_handling">ERROR HANDLING</a>.</p>
 <p><strong>Return values</strong></p>
@@ -302,7 +302,7 @@ attribute of the HTTP::ProxyCheck object or the <code>check()</code> method.</p>
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_proxy(_)">get_proxy( )</a></h2>
+<h2><a name="get_proxy___">get_proxy( )</a></h2>
 <p><code>get_proxy()</code> gets the current value of the object attribute <code>proxy</code>.</p>
 <p><strong>Return values</strong></p>
 <ul>
@@ -319,11 +319,11 @@ attribute of the HTTP::ProxyCheck object or the <code>check()</code> method.</p>
 <p></p></ul>
 <p>
 </p>
-<h2><a name="set_proxy(_$proxy_)">set_proxy( $proxy )</a></h2>
+<h2><a name="set_proxy___proxy__">set_proxy( $proxy )</a></h2>
 <p><code>set_proxy()</code> sets the value of the object attribute <code>proxy</code>.</p>
 <p><strong>Attributes</strong></p>
 <ul>
-<li><strong><a name="item_%24proxy">$proxy</a></strong><br />
+<li><strong><a name="item__24proxy">$proxy</a></strong><br />
 </li>
 The proxy server address has to match the patter 'host:port'. Host and port are
 tested whether they are valid. If you want to disable this test, you can set
@@ -343,7 +343,7 @@ the object attribute <code>check_proxy =&gt; 0</code> or use <code>set_check_pro
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_check_proxy(_)">get_check_proxy( )</a></h2>
+<h2><a name="get_check_proxy___">get_check_proxy( )</a></h2>
 <p><code>get_check_proxy()</code> gets the current value of the object attribute <code>check_proxy</code>.</p>
 <p><strong>Return values</strong></p>
 <ul>
@@ -354,11 +354,11 @@ the object attribute <code>check_proxy =&gt; 0</code> or use <code>set_check_pro
 <p></p></ul>
 <p>
 </p>
-<h2><a name="set_check_proxy(_$check_)">set_check_proxy( $check )</a></h2>
+<h2><a name="set_check_proxy___check__">set_check_proxy( $check )</a></h2>
 <p><code>set_check_proxy</code> sets the object attribute <code>check_proxy</code>.</p>
 <p><strong>Attributes</strong></p>
 <ul>
-<li><strong><a name="item_%24check">$check</a></strong><br />
+<li><strong><a name="item__24check">$check</a></strong><br />
 </li>
 Use <code>0</code> to disable the check whether the proxy server address is valid and <code>1</code>
 to enable it.
@@ -377,7 +377,7 @@ to enable it.
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_url(_)">get_url( )</a></h2>
+<h2><a name="get_url___">get_url( )</a></h2>
 <p><code>get_url()</code> gets the current value of the object attribute <code>url</code>.</p>
 <p><strong>Return values</strong></p>
 <ul>
@@ -394,11 +394,11 @@ to enable it.
 <p></p></ul>
 <p>
 </p>
-<h2><a name="set_url(_$url_)">set_url( $url )</a></h2>
+<h2><a name="set_url___url__">set_url( $url )</a></h2>
 <p><code>set_url</code> sets the object attribute <code>url</code>.</p>
 <p><strong>Attributes</strong></p>
 <ul>
-<li><strong><a name="item_%24url">$url</a></strong><br />
+<li><strong><a name="item__24url">$url</a></strong><br />
 </li>
 The URL has to be of a valid form, e.g. 'http://search.cpan.org'. It gets 
 tested whether it is valid. If you want to disable this test, you can set
@@ -418,7 +418,7 @@ the object attribute <code>check_url =&gt; 0</code> or use <code>set_check_url(0
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_check_url(_)">get_check_url( )</a></h2>
+<h2><a name="get_check_url___">get_check_url( )</a></h2>
 <p><code>get_check_url()</code> gets the current value of the object attribute <code>check_url</code>.</p>
 <p><strong>Return values</strong></p>
 <ul>
@@ -429,7 +429,7 @@ the object attribute <code>check_url =&gt; 0</code> or use <code>set_check_url(0
 <p></p></ul>
 <p>
 </p>
-<h2><a name="set_check_url(_$check_)">set_check_url( $check )</a></h2>
+<h2><a name="set_check_url___check__">set_check_url( $check )</a></h2>
 <p><code>set_check_url</code> sets the object attribute <code>check_url</code>.</p>
 <p><strong>Attributes</strong></p>
 <ul>
@@ -451,7 +451,7 @@ Use <code>0</code> to disable the check whether the URL is valid and <code>1</co
 <p></p></ul>
 <p>
 </p>
-<h2><a name="get_answer_size(_)">get_answer_size( )</a></h2>
+<h2><a name="get_answer_size___">get_answer_size( )</a></h2>
 <p><code>get_answer_size()</code> gets the current value of the object attribute <code>answer_size</code>.</p>
 <p><strong>Return values</strong></p>
 <ul>
@@ -468,11 +468,11 @@ Use <code>0</code> to disable the check whether the URL is valid and <code>1</co
 <p></p></ul>
 <p>
 </p>
-<h2><a name="set_answer_size(_$answer_size_)">set_answer_size( $answer_size )</a></h2>
+<h2><a name="set_answer_size___answer_size__">set_answer_size( $answer_size )</a></h2>
 <p><code>set_answer_size</code> sets the object attribute <code>answer_size</code>.</p>
 <p><strong>Attributes</strong></p>
 <ul>
-<li><strong><a name="item_%24answer_size">$answer_size</a></strong><br />
+<li><strong><a name="item__24answer_size">$answer_size</a></strong><br />
 </li>
 Defines the size of the proxy server answer. Use either <code>short</code>, <code>header</code> or 
 <code>full</code> as value.
@@ -556,13 +556,18 @@ is set to <code>0</code>, this feature is disabled.</p>
 <hr />
 <h1><a name="version">VERSION</a></h1>
 <pre>
-    HTTP::ProxyCheck version 1.0, Tue Aug 12 19:45:00 CEST 2003</pre>
+    HTTP::ProxyCheck version 1.2</pre>
 <p>
 <a href="#__index__"><small>[ back to top ]</small></a>
 </p>
 <hr />
 <h1><a name="changes">CHANGES</a></h1>
 <pre>
+    1.2 Sat May  8 09:38:02 CEST 2004
+        - Fix to unset the error message of a previous IO::Socket::INET run
+          Thanks to Ben Schnopp &lt;ben at schnopp dot com&gt;
+    
+    
     1.1 Tue Aug 12 19:45:00 CEST 2003
         - rewrote the module
         - added better error handling
@@ -593,7 +598,7 @@ is set to <code>0</code>, this feature is disabled.</p>
 </p>
 <hr />
 <h1><a name="copyright">COPYRIGHT</a></h1>
-<p>Copyright (c) 2003 Thomas Weibel. All rights reserved.</p>
+<p>Copyright (c) 2004 Thomas Weibel. All rights reserved.</p>
 <p>This library is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.</p>
 <p><a href="#__index__"><small>[ back to top ]</small></a></p>

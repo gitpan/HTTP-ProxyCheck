@@ -1,4 +1,4 @@
-HTTP::ProxyCheck version 1.1
+HTTP::ProxyCheck version 1.2
 ============================
 
 DESCRIPTION
@@ -37,7 +37,7 @@ http://beeblebrox.net/
 
 COPYRIGHT
 
-Copyright (c) 2003 Thomas Weibel. All rights reserved.
+Copyright (c) 2004 Thomas Weibel. All rights reserved.
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

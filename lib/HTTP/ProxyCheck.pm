@@ -1,7 +1,7 @@
 #===============================================================================
-# HTTP::ProxyCheck Version 1.2, Tue Aug 12 19:45:00 CEST 2003
+# HTTP::ProxyCheck Version 1.2, Sat May  8 09:38:02 CEST 2004
 #===============================================================================
-# Copyright (c) 2003 Thomas Weibel. All rights reserved.
+# Copyright (c) 2004 Thomas Weibel. All rights reserved.
 #
 # This library is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
@@ -19,7 +19,7 @@ use Validate::Net;
 use IO::Socket;
 
 BEGIN {
-    $VERSION = 1.1;
+    $VERSION = 1.2;
     $answer  = '';
     $error   = '';
 
@@ -379,6 +379,10 @@ q#No answer_size defined. Set it as attribute of your 'HTTP::ProxyCheck' object 
 
     $EOL = "\015\012";
 
+    # Fix to unset the error message of a previous IO::Socket::INET run
+    # Thanks to Ben Schnopp <ben at schnopp dot com>
+    undef $@;
+
     # Open socket to proxy server
     my $socket = IO::Socket::INET->new(
         PeerAddr => $proxy,
@@ -396,7 +400,7 @@ q#No answer_size defined. Set it as attribute of your 'HTTP::ProxyCheck' object 
     $request = <<"REQUEST";
 GET $url HTTP/1.0
 Referer: None
-User-Agent: HTTP::ProxyCheck/1.1
+User-Agent: HTTP::ProxyCheck/1.2
 Pragma: no-cache
 
 REQUEST
@@ -1371,11 +1375,16 @@ Unknown
 
 =head1 VERSION
 
-    HTTP::ProxyCheck version 1.0, Tue Aug 12 19:45:00 CEST 2003
+    HTTP::ProxyCheck version 1.2
 
 
 =head1 CHANGES
 
+    1.2 Sat May  8 09:38:02 CEST 2004
+        - Fix to unset the error message of a previous IO::Socket::INET run
+          Thanks to Ben Schnopp <ben at schnopp dot com>
+    
+    
     1.1 Tue Aug 12 19:45:00 CEST 2003
         - rewrote the module
         - added better error handling
@@ -1402,7 +1411,7 @@ Unknown
 
 =head1 COPYRIGHT
 
-Copyright (c) 2003 Thomas Weibel. All rights reserved.
+Copyright (c) 2004 Thomas Weibel. All rights reserved.
 
 This library is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.

@@ -82,6 +82,6 @@ pod2html --css style.css --backlink "[ back to top ]" --infile $lib_path/ProxyCh
 
 pod2text $lib_path/ProxyCheck.pm > $docu_path/HTTP_ProxyCheck.txt
 
-rm -f pod2htmd.x~~ pod2htmi.x~~
+rm -f pod2htmd.* pod2htmi.*
 
 echo "Documentation created"

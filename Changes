@@ -1,5 +1,9 @@
 Revision history for Perl extension HTTP::ProxyCheck.
 
+1.2 Sat May  8 09:38:02 CEST 2004
+    - Fix to unset the error message of a previous IO::Socket::INET run
+      Thanks to Ben Schnopp <ben at schnopp dot com>
+
 1.1 Tue Aug 12 19:45:00 CEST 2003
     - rewrote the module
     - added better error handling
