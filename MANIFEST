@@ -1,6 +1,5 @@
 Changes
 Makefile.PL
-proxycheck.pl
 MANIFEST
 lib/HTTP/ProxyCheck.pm
 README
