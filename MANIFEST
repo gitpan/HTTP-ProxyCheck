@@ -1,0 +1,7 @@
+Changes
+Makefile.PL
+proxycheck.pl
+MANIFEST
+lib/HTTP/ProxyCheck.pm
+README
+t/1.t
