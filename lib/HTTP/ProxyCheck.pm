@@ -1,7 +1,7 @@
 #===============================================================================
-# HTTP::ProxyCheck Version 1.2, Sat May  8 09:38:02 CEST 2004
+# HTTP::ProxyCheck Version 1.3, Sun May  7 11:51:50 CEST 2006
 #===============================================================================
-# Copyright (c) 2004 Thomas Weibel. All rights reserved.
+# Copyright (c) 2004 - 2006 Thomas Weibel. All rights reserved.
 #
 # This library is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
@@ -19,7 +19,7 @@ use Validate::Net;
 use IO::Socket;
 
 BEGIN {
-    $VERSION = 1.2;
+    $VERSION = 1.3;
     $answer  = '';
     $error   = '';
 
@@ -140,6 +140,12 @@ proxy server.
 The default value of C<answer_size> is C<header>.
 
 This attribute can also be set with C<set_answer_size()>.
+
+=item * user_agent => $user_agent
+
+Specifies the name of the user agent sent to the proxy.
+
+If you don't specify a user agent, "HTTP::ProxyCheck/1.3" is used.
 
 =item * verbose_errors => 0|1
 
@@ -301,7 +307,7 @@ C<$HTTP::ProxyCheck::error>
 
 sub check {
     my ( $self, %attr ) = @_;
-    my ( $check_proxy, $check_url, $proxy, $url, $answer_size );
+    my ( $check_proxy, $check_url, $proxy, $url, $answer_size, $user_agent );
 
     #---------------------------------------------------------------------------
     # Parse attributes and set defaults
@@ -371,6 +377,17 @@ q#No answer_size defined. Set it as attribute of your 'HTTP::ProxyCheck' object 
         );
     }
 
+    # Set the user agent
+    if ( defined $attr{user_agent} ) {
+        $user_agent = $attr{user_agent};
+    }
+    elsif ( defined $self->{user_agent} ) {
+        $user_agent = $self->{user_agent};
+    }
+    else {
+        $user_agent = "HTTP::ProxyCheck/" . $VERSION;
+    }
+
     #---------------------------------------------------------------------------
     # Proxy check
     #---------------------------------------------------------------------------
@@ -400,7 +417,7 @@ q#No answer_size defined. Set it as attribute of your 'HTTP::ProxyCheck' object 
     $request = <<"REQUEST";
 GET $url HTTP/1.0
 Referer: None
-User-Agent: HTTP::ProxyCheck/1.2
+User-Agent: $user_agent
 Pragma: no-cache
 
 REQUEST
@@ -1380,6 +1397,11 @@ Unknown
 
 =head1 CHANGES
 
+    1.3 Sun May  7 11:51:50 CEST 2006
+        - Charles Longeau <chl attuxfamily dot org> made a small patch to 
+          specify the user agent, instead of a fixed "HTTP::ProxyCheck/$VERSION"
+          one.
+    
     1.2 Sat May  8 09:38:02 CEST 2004
         - Fix to unset the error message of a previous IO::Socket::INET run
           Thanks to Ben Schnopp <ben at schnopp dot com>
@@ -1411,7 +1433,7 @@ Unknown
 
 =head1 COPYRIGHT
 
-Copyright (c) 2004 Thomas Weibel. All rights reserved.
+Copyright (c) 2004 - 2006 Thomas Weibel. All rights reserved.
 
 This library is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.
