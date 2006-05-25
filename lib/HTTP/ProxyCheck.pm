@@ -1,5 +1,5 @@
 #===============================================================================
-# HTTP::ProxyCheck Version 1.3, Sun May  7 11:51:50 CEST 2006
+# HTTP::ProxyCheck Version 1.4, Thu May 25 10:47:42 CEST 2006
 #===============================================================================
 # Copyright (c) 2004 - 2006 Thomas Weibel. All rights reserved.
 #
@@ -19,7 +19,7 @@ use Validate::Net;
 use IO::Socket;
 
 BEGIN {
-    $VERSION = 1.3;
+    $VERSION = 1.4;
     $answer  = '';
     $error   = '';
 
@@ -145,7 +145,7 @@ This attribute can also be set with C<set_answer_size()>.
 
 Specifies the name of the user agent sent to the proxy.
 
-If you don't specify a user agent, "HTTP::ProxyCheck/1.3" is used.
+If you don't specify a user agent, "HTTP::ProxyCheck/1.4" is used.
 
 =item * verbose_errors => 0|1
 
@@ -1397,6 +1397,9 @@ Unknown
 
 =head1 CHANGES
 
+    1.4 Thu May 25 10:47:42 CEST 2006
+        - Added installation instructions to README
+    
     1.3 Sun May  7 11:51:50 CEST 2006
         - Charles Longeau <chl attuxfamily dot org> made a small patch to 
           specify the user agent, instead of a fixed "HTTP::ProxyCheck/$VERSION"
